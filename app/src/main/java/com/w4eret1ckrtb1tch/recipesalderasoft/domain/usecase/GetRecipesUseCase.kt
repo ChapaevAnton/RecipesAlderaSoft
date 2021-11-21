@@ -8,7 +8,6 @@ import javax.inject.Inject
 class GetRecipesUseCase @Inject constructor(
     private val repository: RecipesRepository
 ) {
-    // OPTIMIZE: 20.11.2021 refactoring to result
     operator fun invoke(): Single<List<RecipeEntity>?> {
         return repository.getRecipes()
     }

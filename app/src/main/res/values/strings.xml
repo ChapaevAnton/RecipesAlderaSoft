@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RecipesAlderaSoft</string>
     <string name="image">image recipe</string>
+    <string name="retry">retry</string>
 </resources>
