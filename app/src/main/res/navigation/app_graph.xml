@@ -10,7 +10,7 @@
         android:name="com.w4eret1ckrtb1tch.recipesalderasoft.ui.fragment.ListRecipesFragment"
         tools:layout="@layout/fragment_list_recipes">
         <action
-            android:id="@+id/action_list_recipes_to_description_recipe"
+            android:id="@+id/action_to_description_recipe"
             app:destination="@id/description_recipe" />
     </fragment>
 
@@ -22,5 +22,9 @@
             android:name="uuidRecipe"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_to_description_similar_recipe"
+            app:destination="@id/description_recipe" />
     </fragment>
+
 </navigation>

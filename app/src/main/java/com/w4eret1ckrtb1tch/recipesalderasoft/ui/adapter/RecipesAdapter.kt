@@ -29,8 +29,7 @@ class RecipesAdapter(private val clickRecipe: (uuidRecipe: String?) -> Unit) :
     class RecipesHolder private constructor(
         private val binding: ItemRecipeBinding,
         private val clickRecipe: (uuidRecipe: String?) -> Unit
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         companion object {
             operator fun invoke(
@@ -43,12 +42,14 @@ class RecipesAdapter(private val clickRecipe: (uuidRecipe: String?) -> Unit) :
             }
         }
 
-        fun bind(recipe: RecipeEntity) {
-            with(binding) {
-                Glide.with(root).load(recipe.images?.get(0)).centerCrop().into(image)
-                name.text = recipe.name
-                description.text = recipe.description
-                root.setOnClickListener { clickRecipe(recipe.uuid) }
+        fun bind(recipe: RecipeEntity?) {
+            recipe?.let {
+                with(binding) {
+                    Glide.with(root).load(recipe.images?.get(0)).centerCrop().into(image)
+                    name.text = recipe.name
+                    description.text = recipe.description
+                    root.setOnClickListener { clickRecipe(recipe.uuid) }
+                }
             }
         }
     }

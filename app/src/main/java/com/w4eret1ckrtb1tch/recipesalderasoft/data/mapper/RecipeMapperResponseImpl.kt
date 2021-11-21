@@ -29,7 +29,7 @@ class RecipeMapperResponseImpl @Inject constructor() :
     private fun mapSimilarDtoToEntity(similar: List<SimilarDto>?): List<SimilarEntity>? {
         return similar?.map {
             SimilarEntity(
-                uuid = UUID.fromString(it.uuid),
+                uuid = it.uuid ?: UUID.randomUUID().toString(),
                 name = it.name,
                 image = it.image
             )

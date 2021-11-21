@@ -63,8 +63,8 @@ class ListRecipesFragment : DaggerFragment(R.layout.fragment_list_recipes) {
 
     private fun openListRecipesToDescriptionRecipe(uuidRecipe: String?) {
         Log.d("TAG", "clickRecipe: $uuidRecipe")
-        val action =
-            ListRecipesFragmentDirections.actionListRecipesToDescriptionRecipe(uuidRecipe)
+        val action = ListRecipesFragmentDirections
+            .actionToDescriptionRecipe(uuidRecipe)
         findNavController().navigate(action)
     }
 
