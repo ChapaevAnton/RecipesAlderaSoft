@@ -9,8 +9,9 @@ import com.w4eret1ckrtb1tch.recipesalderasoft.domain.entity.RecipeEntity
 import com.w4eret1ckrtb1tch.recipesalderasoft.domain.usecase.GetRecipesUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class ListRecipesViewModel constructor(
+class ListRecipesViewModel @Inject constructor(
     private val getRecipesUseCase: GetRecipesUseCase
 ) : ViewModel() {
 
