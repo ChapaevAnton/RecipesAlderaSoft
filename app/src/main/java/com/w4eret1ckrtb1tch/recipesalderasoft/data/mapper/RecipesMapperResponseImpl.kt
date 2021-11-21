@@ -15,7 +15,7 @@ class RecipesMapperResponseImpl @Inject constructor() :
     override fun mapRecipeDtoToEntity(recipe: RecipeDto): RecipeEntity {
         return with(recipe) {
             RecipeEntity(
-                uuid = UUID.fromString(uuid),
+                uuid = uuid ?: UUID.randomUUID().toString(),
                 name = name,
                 images = images,
                 lastUpdated = lastUpdated,

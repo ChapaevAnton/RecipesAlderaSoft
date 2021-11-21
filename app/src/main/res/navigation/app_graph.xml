@@ -8,6 +8,19 @@
     <fragment
         android:id="@+id/list_recipes"
         android:name="com.w4eret1ckrtb1tch.recipesalderasoft.ui.fragment.ListRecipesFragment"
-        tools:layout="@layout/fragment_list_recipes" />
+        tools:layout="@layout/fragment_list_recipes">
+        <action
+            android:id="@+id/action_list_recipes_to_description_recipe"
+            app:destination="@id/description_recipe" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/description_recipe"
+        android:name="com.w4eret1ckrtb1tch.recipesalderasoft.ui.fragment.DescriptionRecipeFragment"
+        tools:layout="@layout/fragment_description_recipe">
+        <argument
+            android:name="uuidRecipe"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>
