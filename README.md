@@ -67,3 +67,5 @@ GET /recipes/:uuid
 
 Выполненное задание необходимо разместить в GitHub, GitLab или любом другом удобном.
 
+![image](https://user-images.githubusercontent.com/69672210/142805228-2e425d19-73a2-4803-adf9-5847dd88cf4a.png)
+![image](https://user-images.githubusercontent.com/69672210/142805286-1df95799-4f34-4fe7-b556-cfbd12125d4f.png)
