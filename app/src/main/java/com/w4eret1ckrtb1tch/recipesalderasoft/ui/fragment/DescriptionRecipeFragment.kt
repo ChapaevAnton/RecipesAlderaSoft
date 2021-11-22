@@ -5,16 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.snackbar.Snackbar
 import com.w4eret1ckrtb1tch.recipesalderasoft.R
 import com.w4eret1ckrtb1tch.recipesalderasoft.databinding.FragmentDescriptionRecipeBinding
 import com.w4eret1ckrtb1tch.recipesalderasoft.domain.entity.RecipeEntity
 import com.w4eret1ckrtb1tch.recipesalderasoft.domain.entity.Result
 import com.w4eret1ckrtb1tch.recipesalderasoft.presentation.factories.ViewModelFactory
 import com.w4eret1ckrtb1tch.recipesalderasoft.presentation.viewmodel.DescriptionRecipeViewModel
+import com.w4eret1ckrtb1tch.recipesalderasoft.ui.activity.MainActivity
 import com.w4eret1ckrtb1tch.recipesalderasoft.ui.adapter.ImagesAdapter
 import com.w4eret1ckrtb1tch.recipesalderasoft.ui.adapter.SimilarAdapter
 import com.w4eret1ckrtb1tch.recipesalderasoft.ui.adapter.SpacingItemDecoration
@@ -86,34 +87,36 @@ class DescriptionRecipeFragment : DaggerFragment(R.layout.fragment_description_r
     private fun resolveSuccess(recipe: RecipeEntity) {
         binding?.apply {
             progressBar.visibility = View.GONE
-            name.text = recipe.name
-            difficulty.text = recipe.difficulty.toString()
-            description.text = recipe.description
+            root.visibility = View.VISIBLE
+            name.text = recipe.name ?: getString(R.string.default_no_value_text)
+            difficulty.rating = recipe.difficulty?.toFloat()
+                ?: resources.getDimension(R.dimen.default_no_value_float)
+            description.text = recipe.description ?: getString(R.string.default_no_value_text)
             recipe.images?.let { imagesAdapter.imagesUrl = it }
             recipe.similar?.let { similarAdapter.similar = it }
-            instruction.text = recipe.instructions
+            instruction.text = HtmlCompat.fromHtml(
+                recipe.instructions ?: getString(R.string.default_no_value_text),
+                HtmlCompat.FROM_HTML_MODE_COMPACT
+            )
         }
     }
 
     private fun resolveFailure(exception: Throwable?) {
-        showDescription(exception?.message.toString())
         binding?.apply {
+            (requireActivity() as MainActivity)
+                .showDescription(
+                    exception?.message.toString(),
+                    root
+                ) { viewModel.loadRecipeDescription(recipeUuid) }
             progressBar.visibility = View.GONE
+            root.visibility = View.GONE
         }
     }
 
     private fun resolveLoading() {
         binding?.apply {
             progressBar.visibility = View.VISIBLE
+            root.visibility = View.GONE
         }
     }
-
-    private fun showDescription(description: String) {
-        val snackBar = Snackbar.make(binding?.root!!, description, Snackbar.LENGTH_INDEFINITE)
-        snackBar
-            .setMaxInlineActionWidth(resources.getDimensionPixelSize(R.dimen.design_snackbar_action_inline_max_width))
-            .setAction(R.string.retry) { viewModel.loadRecipeDescription(recipeUuid); snackBar.dismiss() }
-            .show()
-    }
-
 }

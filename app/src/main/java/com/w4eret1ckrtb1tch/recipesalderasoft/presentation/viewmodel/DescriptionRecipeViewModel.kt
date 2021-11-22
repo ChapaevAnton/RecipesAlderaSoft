@@ -26,10 +26,10 @@ class DescriptionRecipeViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ recipe ->
-                Log.d("TAG", "recipe load: ok")
+                Log.d("TAG", "recipe load: $recipe")
                 recipeDescription.value = recipe?.let { Result.Success(it) }
             }, { error ->
-                Log.d("TAG", "recipes load: $error")
+                Log.d("TAG", "recipe load: $error")
                 recipeDescription.value = Result.Failure(error)
             })
     }

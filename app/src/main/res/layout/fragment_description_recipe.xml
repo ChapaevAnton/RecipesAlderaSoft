@@ -12,8 +12,8 @@
 
         <ProgressBar
             android:id="@+id/progressBar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/progress_bar_size"
+            android:layout_height="@dimen/progress_bar_size"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,10 +26,10 @@
             style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="6dp"
-            app:layout_constraintBottom_toTopOf="@id/difficulty"
+            android:layout_marginStart="@dimen/margin_size"
+            android:layout_marginTop="@dimen/margin_size"
+            android:layout_marginEnd="@dimen/margin_size"
+            app:layout_constraintBottom_toTopOf="@id/difficulty_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,26 +37,40 @@
             tools:text="@tools:sample/lorem" />
 
         <TextView
-            android:id="@+id/difficulty"
-            android:layout_width="0dp"
+            android:id="@+id/difficulty_title"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginTop="@dimen/margin_size"
+            android:text="@string/difficulty_level"
+            app:layout_constraintBottom_toTopOf="@id/difficulty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name" />
+
+        <RatingBar
+            android:id="@+id/difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_size"
+            android:layout_marginTop="@dimen/margin_size"
+            android:layout_marginEnd="@dimen/margin_size"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="1"
             app:layout_constraintBottom_toTopOf="@id/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name"
-            tools:text="@tools:sample/us_zipcodes" />
+            app:layout_constraintTop_toBottomOf="@id/difficulty_title" />
 
         <TextView
             android:id="@+id/description"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginStart="@dimen/margin_size"
+            android:layout_marginTop="@dimen/margin_size"
+            android:layout_marginEnd="@dimen/margin_size"
             app:layout_constraintBottom_toTopOf="@id/images"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,28 +81,40 @@
             android:id="@+id/images"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginStart="@dimen/margin_size"
+            android:layout_marginTop="@dimen/margin_size"
+            android:layout_marginEnd="@dimen/margin_size"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/instruction_scroll"
+            app:layout_constraintBottom_toTopOf="@id/instruction_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description"
             tools:listitem="@layout/item_image" />
 
+        <TextView
+            android:id="@+id/instruction_title"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_size"
+            android:text="@string/instruction"
+            app:layout_constraintBottom_toTopOf="@id/instruction_scroll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/images" />
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/instruction_scroll"
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="6dp"
-            app:layout_constraintBottom_toTopOf="@id/similar"
+            android:layout_height="@dimen/nested_scroll_size"
+            android:layout_marginStart="@dimen/margin_size"
+            android:layout_marginTop="@dimen/margin_size"
+            android:layout_marginEnd="@dimen/margin_size"
+            app:layout_constraintBottom_toTopOf="@id/similar_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/images">
+            app:layout_constraintTop_toBottomOf="@id/instruction_title">
 
             <TextView
                 android:id="@+id/instruction"
@@ -98,20 +124,32 @@
                 tools:text="@tools:sample/lorem/random" />
         </androidx.core.widget.NestedScrollView>
 
+        <TextView
+            android:id="@+id/similar_title"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_size"
+            android:text="@string/similar_recipes"
+            app:layout_constraintBottom_toTopOf="@id/similar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/instruction_scroll" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/similar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/margin_size"
+            android:layout_marginTop="@dimen/margin_size"
+            android:layout_marginEnd="@dimen/margin_size"
+            android:layout_marginBottom="@dimen/margin_size"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/instruction_scroll"
+            app:layout_constraintTop_toBottomOf="@id/similar_title"
             tools:listitem="@layout/item_similar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

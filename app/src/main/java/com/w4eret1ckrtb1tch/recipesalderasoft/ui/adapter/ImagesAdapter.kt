@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.w4eret1ckrtb1tch.recipesalderasoft.R
 import com.w4eret1ckrtb1tch.recipesalderasoft.databinding.ItemImageBinding
 
 class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImagesHolder>() {
@@ -38,7 +39,11 @@ class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImagesHolder>() {
         fun bind(imageUrl: String?) {
             imageUrl?.let {
                 with(binding) {
-                    Glide.with(root).load(imageUrl).centerCrop().into(image)
+                    Glide.with(root).load(imageUrl)
+                        .placeholder(R.drawable.ic_load)
+                        .error(R.drawable.ic_no_photo)
+                        .centerCrop()
+                        .into(image)
                 }
             }
         }

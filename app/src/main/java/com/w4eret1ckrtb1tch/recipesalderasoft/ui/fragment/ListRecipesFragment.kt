@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.w4eret1ckrtb1tch.recipesalderasoft.R
 import com.w4eret1ckrtb1tch.recipesalderasoft.databinding.FragmentListRecipesBinding
 import com.w4eret1ckrtb1tch.recipesalderasoft.domain.entity.RecipeEntity
 import com.w4eret1ckrtb1tch.recipesalderasoft.domain.entity.Result
 import com.w4eret1ckrtb1tch.recipesalderasoft.presentation.factories.ViewModelFactory
 import com.w4eret1ckrtb1tch.recipesalderasoft.presentation.viewmodel.ListRecipesViewModel
+import com.w4eret1ckrtb1tch.recipesalderasoft.ui.activity.MainActivity
 import com.w4eret1ckrtb1tch.recipesalderasoft.ui.adapter.RecipesAdapter
 import com.w4eret1ckrtb1tch.recipesalderasoft.ui.adapter.SpacingItemDecoration
 import dagger.Lazy
@@ -77,8 +77,12 @@ class ListRecipesFragment : DaggerFragment(R.layout.fragment_list_recipes) {
     }
 
     private fun resolveFailure(exception: Throwable?) {
-        showDescription(exception?.message.toString())
         binding?.apply {
+            (requireActivity() as MainActivity)
+                .showDescription(
+                    exception?.message.toString(),
+                    root
+                ) { viewModel.loadRecipes() }
             listRecipes.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
         }
@@ -91,11 +95,4 @@ class ListRecipesFragment : DaggerFragment(R.layout.fragment_list_recipes) {
         }
     }
 
-    private fun showDescription(description: String) {
-        val snackBar = Snackbar.make(binding?.root!!, description, Snackbar.LENGTH_INDEFINITE)
-        snackBar
-            .setMaxInlineActionWidth(resources.getDimensionPixelSize(R.dimen.design_snackbar_action_inline_max_width))
-            .setAction(R.string.retry) { viewModel.loadRecipes(); snackBar.dismiss() }
-            .show()
-    }
 }

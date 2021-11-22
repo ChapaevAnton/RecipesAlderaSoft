@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_size">100dp</dimen>
+    <dimen name="progress_bar_size">100dp</dimen>
+    <dimen name="text_size">150dp</dimen>
+    <dimen name="margin_size">6dp</dimen>
+    <dimen name="nested_scroll_size">200dp</dimen>
+    <dimen name="default_no_value_float">0F</dimen>
+
+</resources>

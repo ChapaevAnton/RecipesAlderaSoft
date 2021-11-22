@@ -2,4 +2,8 @@
     <string name="app_name">RecipesAlderaSoft</string>
     <string name="image">image recipe</string>
     <string name="retry">retry</string>
+    <string name="difficulty_level">difficulty level</string>
+    <string name="instruction">instruction</string>
+    <string name="similar_recipes">similar recipes</string>
+    <string name="default_no_value_text">no value</string>
 </resources>

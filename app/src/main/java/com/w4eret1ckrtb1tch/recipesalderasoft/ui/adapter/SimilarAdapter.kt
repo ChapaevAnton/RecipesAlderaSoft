@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.w4eret1ckrtb1tch.recipesalderasoft.R
 import com.w4eret1ckrtb1tch.recipesalderasoft.databinding.ItemSimilarBinding
 import com.w4eret1ckrtb1tch.recipesalderasoft.domain.entity.SimilarEntity
 
@@ -17,7 +18,7 @@ class SimilarAdapter(private val clickRecipe: (uuidRecipe: String?) -> Unit) :
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarHolder =
-        SimilarHolder(parent,clickRecipe)
+        SimilarHolder(parent, clickRecipe)
 
     override fun onBindViewHolder(holder: SimilarHolder, position: Int) {
         holder.bind(similar[position])
@@ -44,8 +45,13 @@ class SimilarAdapter(private val clickRecipe: (uuidRecipe: String?) -> Unit) :
         fun bind(similar: SimilarEntity?) {
             similar?.let {
                 with(binding) {
-                    Glide.with(root).load(similar.image).centerCrop().into(image)
+                    Glide.with(root).load(similar.image)
+                        .placeholder(R.drawable.ic_load)
+                        .error(R.drawable.ic_no_photo)
+                        .centerCrop()
+                        .into(image)
                     name.text = similar.name
+                        ?: root.context.resources.getString(R.string.default_no_value_text)
                     root.setOnClickListener { clickRecipe(similar.uuid) }
                 }
             }

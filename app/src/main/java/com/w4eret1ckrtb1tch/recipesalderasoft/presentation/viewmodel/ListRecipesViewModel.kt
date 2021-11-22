@@ -30,7 +30,7 @@ class ListRecipesViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ listRecipe ->
-                Log.d("TAG", "recipes load: ok")
+                Log.d("TAG", "recipes load: $listRecipe")
                 recipes.value = listRecipe?.let { Result.Success(it) }
             }, { error ->
                 Log.d("TAG", "recipes load: $error")
